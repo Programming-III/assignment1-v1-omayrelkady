@@ -4,24 +4,48 @@
 #include "Animal.h"
 
 //define enclosure class here 
-class Reptile : public Animal {
+class Enclosure {
 private:
-    bool isVenomous;
+    Animal** animals;   // dynamic array of Animal*
+    int capacity;
+    int currentCount;
 
 public:
-    Reptile() : Animal(), isVenomous(false) {}
-    Reptile(const string& name, int age, bool isHungry, bool isVenomous)
-        : Animal(name, age, isHungry), isVenomous(isVenomous) {}
-    ~Reptile() override {}
+    Enclosure() : animals(nullptr), capacity(0), currentCount(0) {}
 
-    bool getIsVenomous() const { return isVenomous; }
-    void setIsVenomous(bool v) { isVenomous = v; }
+    Enclosure(int cap) : capacity(cap), currentCount(0) {
+        animals = new Animal*[capacity];
+        for (int i = 0; i < capacity; ++i) animals[i] = nullptr;
+    }
 
-    void display() const override {
-        // Must include "Venomous" before hunger state, per sample output
-        cout << getName() << " (Age: " << getAge() << ", "
-             << (isVenomous ? "Venomous, " : "")
-             << (getIsHungry() ? "Hungry" : "Not Hungry") << ")";
+    ~Enclosure() {
+        // Assume ownership of animals and delete them
+        for (int i = 0; i < currentCount; ++i) {
+            delete animals[i];
+            animals[i] = nullptr;
+        }
+        delete[] animals;
+    }
+
+    int getCapacity() const { return capacity; }
+    int getCurrentCount() const { return currentCount; }
+
+    void addAnimal(Animal* a) {
+        if (currentCount < capacity) {
+            animals[currentCount++] = a;
+        } else {
+            // Optional: resize (not required here); for safety, delete passed pointer
+            // but typically caller should handle. We'll just print an error and keep pointer alive.
+            cout << "Enclosure is full. Cannot add more animals.\n";
+        }
+    }
+
+    void displayAnimals(int enclosureNumber = 1) const {
+        cout << "Enclosure " << enclosureNumber << " Animals:\n\n";
+        for (int i = 0; i < currentCount; ++i) {
+            animals[i]->display();
+            cout << "\n";
+        }
     }
 };
 

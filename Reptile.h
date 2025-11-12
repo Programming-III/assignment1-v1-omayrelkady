@@ -3,7 +3,7 @@
 
 #include "Animal.h"
 
-//define reptile class here
+
 class Reptile : public Animal {
 private:
     bool isVenomous;
@@ -18,7 +18,7 @@ public:
     void setIsVenomous(bool v) { isVenomous = v; }
 
     void display() const override {
-        // Must include "Venomous" before hunger state, per sample output
+       
         cout << getName() << " (Age: " << getAge() << ", "
              << (isVenomous ? "Venomous, " : "")
              << (getIsHungry() ? "Hungry" : "Not Hungry") << ")";

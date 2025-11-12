@@ -3,10 +3,10 @@
 
 #include "Animal.h"
 
-//define enclosure class here 
+
 class Enclosure {
 private:
-    Animal** animals;   // dynamic array of Animal*
+    Animal** animals;   
     int capacity;
     int currentCount;
 
@@ -19,7 +19,7 @@ public:
     }
 
     ~Enclosure() {
-        // Assume ownership of animals and delete them
+     
         for (int i = 0; i < currentCount; ++i) {
             delete animals[i];
             animals[i] = nullptr;
@@ -34,8 +34,7 @@ public:
         if (currentCount < capacity) {
             animals[currentCount++] = a;
         } else {
-            // Optional: resize (not required here); for safety, delete passed pointer
-            // but typically caller should handle. We'll just print an error and keep pointer alive.
+            
             cout << "Enclosure is full. Cannot add more animals.\n";
         }
     }

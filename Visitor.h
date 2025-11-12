@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-//define visitor cclass Visitor {
+
 private:
     string visitorName;
     int ticketsBought;

@@ -3,7 +3,7 @@
 
 #include "Animal.h"
 
-//define class bird here 
+/
 class Bird : public Animal {
 private:
     float wingSpan;
@@ -18,7 +18,7 @@ public:
     void setWingSpan(float w) { wingSpan = w; }
 
     void display() const override {
-        // Output matches required format (no extra fields shown in sample)
+        
         Animal::display();
     }
 };
